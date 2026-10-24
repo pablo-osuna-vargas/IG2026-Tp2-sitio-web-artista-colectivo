@@ -1,17 +1,11 @@
 INFORMATICA GENERAL
 CAT.: DRELICHMAN
 2026
-===
 
-
-
-### "TITULO"
-
-
+"TITULO"
 
 Integrantes:
-
-&#x09;Pablo Osuna Vargas.
-	Joel Ledezma.
-	Ángel León Cabral.
+	Pablo Osuna Vargas
+	Joel Ledezma
+	Ángel León Cabral
 
