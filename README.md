@@ -11,7 +11,7 @@ CAT.: DRELICHMAN
 
 Integrantes:
 
-&#x09;Pablo Osuna Vargas.
-	Joel Ledezma.
-	Ángel León Cabral.
+&#x09;Pablo Osuna Vargas
+	Joel Ledezma
+	Ángel León Cabral
 
