@@ -111,6 +111,106 @@ Implementación de visores para monitoreo y cambios de estado
 
 
 
+========================
+
+PANAJEDREZ \[v1.3]
+
+========================
+
+\## ESTADO CONCEPTUAL
+
+
+
+Aunque el proyecto surge como una aproximación lúdica a la Panlengua de Xul Solar trabajando en una simplificación de su juego, actualmente evoluciona hacia una interfaz de composición estética donde signos, espacio, sonido y color forman parte de una misma experiencia de creación asistida por software.
+
+
+
+\## PROTO-TABLERO
+
+
+
+La obra adquiere una dimensión espacial. Las emisiones dejan de existir únicamente como lenguaje y comienzan a ocupar lugares dentro de un territorio compositivo. Las vocales dejan de funcionar como datos seleccionables y se transforman en espacios habitables dentro del tablero.
+
+La v1.3 representa el tablero mediante un array. El tablero visual y el tablero lógico son estructuras distintas. El tablero lógico almacena el estado de ocupación de cada posición. Cada elemento del array representa una casilla.
+
+
+
+Ejemplo:
+
+tablero\[3] = {
+
+&#x09;silaba: "MAA",
+
+&#x09;sonido: null,
+
+&#x09;color: null,
+
+&#x09;posicion: 3
+
+};
+
+La posición 3 del tablero contiene la emisión MAA en casilla 3
+
+
+
+\## PROPUESTA
+
+
+
+Las consonantes serían fichas. Las vocales casillas. Cada emisión surge cuando el usuario selecciona una consonante y luego ocupa una casilla del proto-tablero. Ejemplo: M + AA → MAA
+
+
+
+\## VOCALES
+
+
+
+Las vocales ya no están en un formulario, forman parte del espacio compositivo.
+
+
+
+\## CONSONANTES
+
+
+
+Elemento móvil -ficha (en proceso)- que ocupa una casilla del tablero.
+
+
+
+\## EMISIÓN
+
+Cada emisión es una posición del tablero donde fue creada. Forma parte de la identidad de la emisión.
+
+
+
+\## INTERACTIVIDAD
+
+
+
+Seleccionar consonante → Ocupar casilla vocal → Generar emisión → Agregar emisión al signo actual → Respirar (Cerrar signo) → Continuar componiendo → 13 · Exponer obra → Contemplar
+
+
+
+\## REPASO TÉCNICO
+
+
+
+Objetos con propiedades, relación datos- tablero visual
+
+
+
+\## RESULTADO
+
+Ahora cada emisión posee: identidad lingüística (sílaba), identidad espacial (posición), quedando preparada para futuras propiedades: sonido, color, constelación, poema. Sin modificar la arquitectura del juego
+
+
+
+\-------------------------------------------------------------------------------
+
+
+
+
+
 
 
 
