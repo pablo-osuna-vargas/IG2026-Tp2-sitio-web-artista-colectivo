@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/estilos-ruedaConstelar.css">
+
+    <title>Panajedrez v1.7</title>
+</head>
+
+<body>
+<div class="container py-4">
+    <h1 class="text-center mb-4">PANAJEDREZ v1.7</h1>
+
+<!-- PANEL GENERAL -->
+    <div class="row">
+
+    <!-- FICHAS col 1 -->
+        <div class="col">
+            <div class="card p-3 mb-3">
+                <h2 class="h5 text-center">Consonante (Ficha)</h2>
+
+                <select id="consonante" class="form-select">
+                    <option>M</option>
+                    <option>T</option>
+                    <option>S</option>
+                    <option>P</option>
+                    <option>K</option>
+                </select>
+            </div>
+
+    <!-- VISOR DE SIGNOS -->
+            <div class="card p-3 mb-3">
+                <h2 class="h5 text-center">Signo actual</h2>
+                <p id="signoActual" class="fs-4 mb-3"></p>
+
+                <button id="btnCerrar" class="btn btn-secondary">Cerrar signo</button>
+            </div>
+        </div>
+
+    <!-- TABLERO col 2 -->
+        <div class="col">
+            <div class="card p-3 mb-3">
+                <h2 class="h5 text-center">Proto-tablero vocal</h2>
+                <div id="tablero" class="row g-2"></div>
+            </div>
+        </div>
+    </div>
+
+
+
+<!-- VISOR OBRA col 3 -->
+    <div class="row">
+        <div class="col">
+            <div class="card p-3 mb-3">
+                <h2 class="h5 text-center">Obra</h2>
+                <div id="obra"></div>
+            </div>
+        </div>
+    </div>
+
+
+
+<!-- BOTON EXPONER col 4 -->
+    <div class="row">
+        <div class="text-center">
+            <button id="btnExponer" class="btn btn-dark mb-3 mt-3">13 · Exponer obra</button>
+        </div>
+
+    <!-- RUEDA CONSTELAR -->
+        <div class="p-3 mb-3">
+            <h2 class="h5 text-center">Rueda Constelar</h2>
+
+        <!-- LIENZO SVG -->
+            <div id="ruedaConstelar" class="rueda col-md-9">
+                
+                <svg id="lienzoConstelar"></svg>
+
+                <div id="nodos"></div>
+                
+            </div>
+        </div>
+    </div>
+
+
+
+<!-- VISORES DE NODOS Y LISTA DE CONEXIONES col 5 -->
+    <div class="row">
+        <div class="col">
+            <div class="card p-3 mb-3 h-100">
+                <h2 class="h5 text-center">Nodos Activos</h2>
+                <div id="nodosActivos" class="row g-2"></div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card p-3 mb-3 h-100">
+                <h2 class="h5 text-center">Conexiones</h2>
+                <div id="conexiones" class="row g-2"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/panajedrez-v1.7.js"></script>
+
+</body>
+</html>

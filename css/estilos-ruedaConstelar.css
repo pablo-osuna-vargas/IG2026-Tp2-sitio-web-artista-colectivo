@@ -1,0 +1,28 @@
+.rueda {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    margin: 0 auto;
+    border: 1px solid lightgray;
+}
+
+.nodo {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: lightgray;
+}
+
+.nodo-activo {
+    background-color: gold;
+    box-shadow: 0 0 10px gold;
+}
+
+#lienzoConstelar{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+}

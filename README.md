@@ -13,11 +13,11 @@ Joel Ledezma
 
 
 
-=============================
+==========================================================
 
-PANAJEDREZ \[v1.0] 1ra parte
+PANAJEDREZ \[v1.0] 1ra parte - funcionalidad e interacción
 
-=============================
+==========================================================
 
 
 
@@ -29,11 +29,7 @@ Panajedrez es una obra generativa interactiva inspirada en los sistemas simbóli
 
 \## PROPUESTA
 
-El usuario construye una composición mediante la combinación de consonantes y grupos vocálicos. Cada combinación genera unidades lingüísticas que participan simultáneamente en la construcción de: una estructura verbal, una melodía, una constelación visual, un poema
-
-El juego no busca competir, sino habilitar un proceso de exploración y composición.
-
-La obra surge de las decisiones del usuario. No existe una solución predefinida.
+El usuario construye una composición mediante la combinación de consonantes y grupos vocálicos (ficha + casilla). Cada combinación (emisión) genera unidades lingüísticas que participan simultáneamente en la construcción de: una estructura verbal, una melodía, una constelación visual, un poema. El juego no busca competir, sino habilitar un proceso de exploración y composición. La obra surge de las decisiones del usuario. No existe una solución predefinida.
 
 
 
@@ -47,17 +43,11 @@ El 13 representa el acto de detener la composición y revelar la obra completa.
 
 \## INTERACTIVIDAD
 
-Componer
+Componer: Crear nuevas unidades mediante la combinación de consonantes y grupos vocálicos (emisión).
 
-Crear nuevas unidades mediante la combinación de consonantes y grupos vocálicos.
+Respirar: Cerrar un signo y establecer una pausa dentro de la composición.
 
-Respirar
-
-Cerrar un signo y establecer una pausa dentro de la composición.
-
-Exponer
-
-Acceder al estado 13 para revelar el resultado final de la obra.
+Exponer: Acceder al estado 13 para revelar el resultado final de la obra.
 
 
 
@@ -178,4 +168,110 @@ Cada conexión se almacena en un array como: \[origen,destino]. Nodos activos, c
 Transformar la constelación lógica en una constelación visual. Pasar de los datos al gráfico, iniciando el primer acercamiento visual al universo simbólico y estético de Xul Solar.
 
 
+
+\-------------------------------------------------------------------------------
+
+==============================
+
+PANAJEDREZ \[v1.7]
+
+==============================
+
+\## TRAZADO
+
+Transformar las conexiones lógicas en trayectorias visibles dentro de la Rueda Constelar. La interacción produce un dibujo estructural de su propio recorrido. La constelación comienza a revelarse como trazado.
+
+
+
+\## MEJORA TÉCNICA
+
+Incorporación de un lienzo SVG permanente dentro de la Rueda Constelar.
+
+Separación de capas: Nodos = activaciones, SVG = conexiones
+
+Creación dinámica de elementos SVG (lineas) desde JavaScript.
+
+Conversión automática de conexiones lógicas (origen-destino) en líneas visuales.
+
+
+
+\## ESTADO
+
+Emisión → activa nodos
+
+Conexión → genera trayectorias
+
+Constelación → comienza a materializarse visualmente
+
+
+
+\## PRÓXIMA MEJORA
+
+Simplificar la interfaz y centrar la experiencia
+
+
+
+\----------------------------------------------------------------------------------
+
+====================================
+
+PANAJEDREZ \[SÍNTESIS 1RA PARTE]
+
+====================================
+
+\## v1.0 · Composición
+
+Nace el ciclo fundamental de escritura mediante emisiones, signos y obra.
+
+
+
+\## v1.1 · Signos
+
+Las emisiones se agrupan y aparece la obra como secuencia organizada de signos.
+
+
+
+\## v1.2 · Emisiones
+
+Las emisiones se convierten en objetos capaces de incorporar propiedades futuras.
+
+
+
+\##v1.3 · Proto-tablero
+
+Las consonantes pasan a ser fichas y las vocales territorio, introduciendo la dimensión espacial.
+
+
+
+\## v1.4 · Nodos Activos
+
+Cada emisión deja una huella visual mediante la activación de nodos.
+
+
+
+\## v1.5 · Constelación Lógica
+
+Los nodos comienzan a relacionarse y surge el recorrido de la obra como estructura conexa.
+
+
+
+\##v1.6 · Rueda Constelar
+
+Escritura y contemplación se separan mediante una geografía circular autónoma de doce nodos.
+
+
+
+\## v1.7 · Trazado Constelar
+
+Las conexiones lógicas se transforman en líneas visibles y la obra comienza a dibujar su propia constelación.
+
+
+
+\## PRÓXIMA MEJORA (2da parte CSS y responsive)
+
+Simplificación y reorganización de layout.
+
+
+
+\------------------------------------------------------------------------------------
 
