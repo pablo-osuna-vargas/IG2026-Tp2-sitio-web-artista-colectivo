@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <title>Panajedrez v1.0</title>
+</head>
+
+<body>
+    <div class="container py-4">
+        <h1 class="text-center mb-4">PANAJEDREZ v1.0</h1>
+
+        <div class="card p-3 mb-3">
+            <h2 class="h5">Consonante</h2>
+
+            <select id="consonante" class="form-select mb-3">
+                <option>T</option>
+                <option>S</option>
+                <option>M</option>
+                <option>P</option>
+                <option>K</option>
+            </select>
+
+            <h2 class="h5">Grupo vocálico</h2>
+
+            <select id="vocal" class="form-select mb-3">
+                <option>AA</option>
+                <option>EI</option>
+                <option>OU</option>
+                <option>IE</option>
+                <option>UO</option>
+            </select>
+
+            <button id="btnAgregar" class="btn btn-primary">
+                Agregar emisión
+            </button>
+        </div>
+
+        <div class="card p-3 mb-3">
+            <h2 class="h5">Signo actual</h2>
+            <p id="signoActual" class="fs-4"></p>
+
+            <button id="btnCerrar" class="btn btn-secondary">
+                Cerrar signo
+            </button>
+        </div>
+
+        <div class="card p-3 mb-3">
+            <h2 class="h5">Obra</h2>
+            <div id="obra"></div>
+        </div>
+
+        <div class="text-center">
+            <button id="btnExponer" class="btn btn-dark">
+                13 · Exponer obra
+            </button>
+        </div>
+    </div>
+
+    <script src="js/panajedrez-v1.0.js"></script>
+
+</body>
+
+</html>
