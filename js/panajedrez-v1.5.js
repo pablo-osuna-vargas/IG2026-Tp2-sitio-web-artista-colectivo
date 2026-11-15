@@ -2,8 +2,10 @@
 // DATOS
 // ========================
 
-let signoActual = [];
-let obra = [];
+let signoActual = []; // contiene los signos cerrados para renderizar en pantalla
+let obra = []; // contiene los signos que la componen
+let nodosObra = []; // contiene los nodos (posiciones) activadas por el ususario
+let conexionesObra = []; // contiene los pares de nodos en relación (es decir conectados entre sí) par: origen, destino
 
 // ========================
 // TABLERO
@@ -41,7 +43,8 @@ let tablero = [];
 const consonante = document.querySelector("#consonante");
 const contenedorTablero = document.querySelector("#tablero");
 const textoSigno = document.querySelector("#signoActual");
-const contenedorConstelacion =document.querySelector("#constelacion");
+const contenedorNodosActivos = document.querySelector("#nodosActivos");
+const contenedorConexiones = document.querySelector("#conexiones");
 const contenedorObra = document.querySelector("#obra");
 const btnCerrar = document.querySelector("#btnCerrar");
 const btnExponer = document.querySelector("#btnExponer");
@@ -120,11 +123,17 @@ function colocarEmision(posicion, boton) {
 
     tablero[indice] = emision;
     signoActual.push(emision);
+    nodosObra.push(emision.posicion);
+
+    crearConexion();
+    mostrarConexiones()
+
     boton.textContent = silaba;
     boton.classList.remove("btn-outline-secondary");
     boton.classList.add("btn-primary");
 
     mostrarSignoActual();
+    mostrarNodosActivos();
 }
 
 
@@ -141,7 +150,71 @@ function cerrarSigno() {
     signoActual = [];
 
     mostrarSignoActual();
+    mostrarNodosActivos();
     mostrarObra();
+}
+
+
+// ========================
+// NODOS ACTIVOS
+// ========================
+
+function mostrarNodosActivos() {
+    contenedorNodosActivos.innerHTML = "";
+    for (let i = 0; i < 12; i++) {
+        let nodo = document.createElement("div");
+        nodo.className = "col-3 text-center border p-3";
+
+        let activo = false;
+        for (let j = 0; j < nodosObra.length; j++) {
+            if (nodosObra[j] === i + 1) {
+                activo = true;
+            }
+        }
+
+        if (activo) {
+            nodo.classList.add("bg-primary", "text-white");
+        }
+
+        contenedorNodosActivos.append(nodo);
+    }
+}
+
+
+// ========================
+// CONEXIONES
+// ========================
+
+function crearConexion() {
+    if (nodosObra.length < 2) {
+        return;
+    }
+
+    let origen = nodosObra[nodosObra.length - 2];
+    let destino = nodosObra[nodosObra.length - 1];
+    
+    let conexion = [
+        origen,
+        destino
+    ];
+
+    conexionesObra.push(conexion);
+
+    mostrarConexiones()
+}
+
+
+// ========================
+// MOSTRAR CONEXIONES (CHEQUEO)
+// ========================
+
+function mostrarConexiones() {
+    contenedorConexiones.innerHTML = "";
+    for (let i = 0; i < conexionesObra.length; i++) {
+        let p = document.createElement("p");
+        p.textContent = conexionesObra[i][0] + " → " + conexionesObra[i][1];
+        contenedorConexiones.append(p);
+    }
 }
 
 
@@ -172,4 +245,5 @@ btnExponer.addEventListener("click", exponerObra);
 
 crearTablero();
 mostrarSignoActual();
+mostrarNodosActivos(); // antes era mostrarConstelacionActual, pero era confuso porque no mostraba la constelación propiamente dicha sino un mapa de nodos activos
 mostrarObra();
