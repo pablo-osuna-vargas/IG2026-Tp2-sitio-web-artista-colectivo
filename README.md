@@ -301,3 +301,17 @@ Incorporación de reinicio ("Recrear Cosmos") para restaurar el estado inicial d
 
 
 
+MEJORAS PENDIENTES:
+
+Drag \& drop de fichas
+
+completar total de fichas
+
+completar tablero total de vocales
+
+implementar librería de sonido tone.js
+
+
+
+\---------------------------------------------------------------------------------
+
