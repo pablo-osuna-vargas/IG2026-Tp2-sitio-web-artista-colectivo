@@ -275,3 +275,29 @@ Simplificación y reorganización de layout.
 
 \------------------------------------------------------------------------------------
 
+====================================
+
+PANAJEDREZ \[v2.0] · Revelación de la Obra
+
+====================================
+
+Desde una herramienta de escritura experimental hacia una experiencia de contemplación, la v2.0 reorganiza la experiencia completa para revelar la obra
+
+
+
+\## Innovaciones conceptuales
+
+La constelación pasa a ser un momento de revelación. El usuario primero escribe y después revela. Cierre más fuerte: al activar el 13 desaparecen los tableros y permanece el poema junto a su constelación.
+
+
+
+\## Innovaciones técnicas
+
+Ocultamiento y revelación de interface dinámica del DOM. La Constelación permanece oculta durante la composición mediante CSS y sólo se muestra al finalizar
+
+Integración de lienzo SVG con el sistema de conexiones. Relación lógica con su representación gráfica
+
+Incorporación de reinicio ("Recrear Cosmos") para restaurar el estado inicial del sistema
+
+
+

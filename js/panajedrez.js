@@ -40,45 +40,34 @@ let tablero = [];
 // DOM
 // ========================
 
+const header = document.querySelector("header");
+const footer = document.querySelector("footer");
+const panel = document.querySelector("#panel");
 const consonante = document.querySelector("#consonante");
 const contenedorTablero = document.querySelector("#tablero");
 const textoSigno = document.querySelector("#signoActual");
-const contenedorNodosActivos = document.querySelector("#nodosActivos");
-const contenedorConexiones = document.querySelector("#conexiones");
 const contenedorRueda = document.querySelector("#ruedaConstelar");
 const lienzoConstelar = document.querySelector("#lienzoConstelar");
 const nodos = document.querySelector("#nodos");
+const btnRecrear = document.querySelector("#btnRecrear");
 const geografiaConstelar = {
-
     12: { left: 190, top: 10 },
-
     1:  { left: 270, top: 35 },
-
     2:  { left: 330, top: 90 },
-
     3:  { left: 355, top: 180 },
-
     4:  { left: 330, top: 270 },
-
     5:  { left: 270, top: 330 },
-
     6:  { left: 190, top: 355 },
-
     7:  { left: 110, top: 330 },
-
     8:  { left: 50,  top: 270 },
-
     9:  { left: 25,  top: 180 },
-
     10: { left: 50,  top: 90 },
-
     11: { left: 110, top: 35 }
-
 };
 
 const contenedorObra = document.querySelector("#obra");
 const btnCerrar = document.querySelector("#btnCerrar");
-const btnExponer = document.querySelector("#btnExponer");
+const btnRevelar = document.querySelector("#btnRevelar");
 
 
 // ========================
@@ -157,13 +146,14 @@ function mostrarObra() {
 
         let p = document.createElement("p");
         p.textContent = texto;
+        p.classList = "text-center";
         contenedorObra.append(p);
     }
 }
 
 
 // ========================
-// EMISIONES
+// EMISIONES (sílabas)
 // ========================
 
 function colocarEmision(posicion, boton) {
@@ -186,15 +176,13 @@ function colocarEmision(posicion, boton) {
     nodosObra.push(emision.posicion);
 
     crearConexion();
-    mostrarConexiones();
     crearRuedaConstelar();
 
     boton.textContent = silaba;
     boton.classList.remove("btn-outline-secondary");
-    boton.classList.add("btn-primary");
+    boton.classList.add("btn-outline-warning");
 
     mostrarSignoActual();
-    mostrarNodosActivos();
 }
 
 
@@ -211,34 +199,7 @@ function cerrarSigno() {
     signoActual = [];
 
     mostrarSignoActual();
-    mostrarNodosActivos();
     mostrarObra();
-}
-
-
-// ========================
-// NODOS ACTIVOS
-// ========================
-
-function mostrarNodosActivos() {
-    contenedorNodosActivos.innerHTML = "";
-    for (let i = 0; i < 12; i++) {
-        let nodo = document.createElement("div");
-        nodo.className = "col-3 text-center border p-3";
-
-        let activo = false;
-        for (let j = 0; j < nodosObra.length; j++) {
-            if (nodosObra[j] === i + 1) {
-                activo = true;
-            }
-        }
-
-        if (activo) {
-            nodo.classList.add("bg-primary", "text-white");
-        }
-
-        contenedorNodosActivos.append(nodo);
-    }
 }
 
 
@@ -261,7 +222,7 @@ function crearConexion() {
 
     conexionesObra.push(conexion);
 
-    mostrarConexiones();
+    //mostrarConexiones();
     dibujarLinea(origen, destino);
 }
 
@@ -295,28 +256,21 @@ function dibujarLinea(origen, destino) {
     lienzoConstelar.append(linea);
 }
 
-// ========================
-// MOSTRAR CONEXIONES (CHEQUEO)
-// ========================
-
-function mostrarConexiones() {
-    contenedorConexiones.innerHTML = "";
-    for (let i = 0; i < conexionesObra.length; i++) {
-        let p = document.createElement("p");
-        p.textContent = conexionesObra[i][0] + " → " + conexionesObra[i][1];
-        contenedorConexiones.append(p);
-    }
-}
-
 
 // ========================
-// EXPONER OBRA
+// REVELAR OBRA
 // ========================
 
-function exponerObra() {
+function revelarObra() {
     cerrarSigno();
+    header.remove();
+    panel.remove();
+    footer.remove();
+    contenedorRueda.style.display = "block";
+    btnRecrear.style.display = "block";
+
     alert(
-        "La obra ha sido expuesta.\n" +
+        "La obra ha sido revelada.\n" +
         "Cantidad de signos: " + obra.length
     );
 }
@@ -327,7 +281,8 @@ function exponerObra() {
 // ========================
 
 btnCerrar.addEventListener("click", cerrarSigno);
-btnExponer.addEventListener("click", exponerObra);
+btnRevelar.addEventListener("click", revelarObra);
+btnRecrear.addEventListener("click", function() {location.reload()});
 
 
 // ========================
@@ -337,5 +292,4 @@ btnExponer.addEventListener("click", exponerObra);
 crearTablero();
 crearRuedaConstelar();
 mostrarSignoActual();
-mostrarNodosActivos(); 
 mostrarObra();
