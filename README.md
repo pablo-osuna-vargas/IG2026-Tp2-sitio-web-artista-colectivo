@@ -315,3 +315,45 @@ implementar librería de sonido tone.js
 
 \---------------------------------------------------------------------------------
 
+======================================
+
+Panajedrez v2.1 (Evolución a Matriz 12×12)
+
+======================================
+
+\## Cambios en la Interacción del Usuario
+
+Matriz 12×12: tablero de 144 casillas
+
+Múltiples Emisiones por Signo
+
+Visibilidad Dinámica de la Constelación al presionar "Revelar obra"
+
+
+
+\## Cambios Funcionales
+
+\# Centralidad del Objeto emision. La función colocarEmision() se mantiene como el núcleo generador de datos de toda la obra
+
+
+
+\# Mapeo de Ejes
+
+Eje Y (Signos 1 al 12): La posición del nodo se calcula como posicionNodo = fila + 1. Al registrarse en nodosObra, alimenta de forma limpia a crearRuedaConstelar()
+
+Eje X (Sonidos 1 al 12): La columna determina la vocal (vocales\[col]) y prepara el sistema para la asignación de los 12 sonidos de la octava.
+
+
+
+\# indiceGlobal
+
+Para gestionar el estado individual de las 144 celdas dentro del arreglo unidimensional tablero, se implementó el cálculo de posición lineal: indiceGlobal = (fila X12) + col
+
+
+
+\# Optimización del Renderizado SVG
+
+En la función crearConexion(), se incorporó la condición: if (origen !== destino) Esto impide que el lienzo SVG dibuje líneas entre un nodo y sí mismo cuando el usuario selecciona emisiones consecutivas en la misma fila
+
+
+

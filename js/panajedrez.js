@@ -12,27 +12,12 @@ let conexionesObra = []; // contiene los pares de nodos en relación (es decir c
 // TABLERO
 // ========================
 
-const vocales = [
-
-    "AA",
-    "EI",
-    "OU",
-    "IE",
-
-    "UO",
-    "AA",
-    "EI",
-    "OU",
-
-    "IE",
-    "UO",
-    "AA",
-    "EI"
-
-];
+const vocales = ["AA","EI","OU","IE","UO","AA","EI","OU","IE","UO","AA","EI"];
+const sonidos = ["1","2","3","4","5","6","7","8","9","Q","&","IO"];
+const signos = ["♈","♉","♊","♋","♌","♍","♎","♏","♐","♑","♒","♓"];
 
 let tablero = [];
-    for (let i = 0; i < 12; i++) {
+    for (let i = 0; i < 144; i++) {
         tablero.push(null);
     }
 
@@ -45,6 +30,8 @@ const footer = document.querySelector("footer");
 const panel = document.querySelector("#panel");
 const consonante = document.querySelector("#consonante");
 const contenedorTablero = document.querySelector("#tablero");
+const ejeHorizontal = document.querySelector("#ejeHorizontal");
+const ejeVertical = document.querySelector("#ejeVertical");
 const textoSigno = document.querySelector("#signoActual");
 const contenedorRueda = document.querySelector("#ruedaConstelar");
 const lienzoConstelar = document.querySelector("#lienzoConstelar");
@@ -70,21 +57,59 @@ const btnCerrar = document.querySelector("#btnCerrar");
 const btnRevelar = document.querySelector("#btnRevelar");
 
 
+// ========================\\r 
+// CREAR TABLERO (12x12: Filas = Nodos, Columnas = Sonidos)\\r 
+// ========================\\r 
+function crearTablero() { 
+    contenedorTablero.innerHTML = ""; 
+    
+    // 12 Filas (Cada fila = 1 Nodo / Signo del 1 al 12) 
+    for (let fila = 0; fila < 12; fila++) { 
+        let filaDiv = document.createElement("div"); 
+        filaDiv.className = "row g-1 mb-1"; // Fila nativa de Bootstrap con espaciado ajustado 
+    
+        let posicionNodo = fila + 1; // Asigna el Nodo (1 a 12) según la fila 
+
+    // 12 Columnas (Cada columna = 1 Sonido / Frecuencia del 1 al 12) 
+    for (let col = 0; col < 12; col++) { 
+        let boton = document.createElement("button"); 
+        boton.className = "col-1 btn btn-sm btn-outline-secondary p-1 text-center"; 
+        boton.textContent = vocales[col];
+
+        let indiceGlobal = (fila * 12) + col;
+
+        // Al hacer clic, se envía la posicionNodo (1-12) correspondiente a la fila 
+        boton.addEventListener("click", function () {colocarEmision(posicionNodo, boton, indiceGlobal);}); 
+
+        filaDiv.append(boton);
+        } 
+
+    contenedorTablero.append(filaDiv); 
+    } 
+}
+
+
 // ========================
-// CREAR TABLERO
+// CREAR EJES
 // ========================
 
-function crearTablero() {
-    contenedorTablero.innerHTML = "";
-    for (let i = 0; i < vocales.length; i++) {
-        let boton = document.createElement("button");
-        boton.className = "col-3 btn btn-outline-secondary";
-        boton.textContent = vocales[i];
+function crearEjes() {
+    ejeHorizontal.innerHTML = "";
+    ejeVertical.innerHTML = "";
 
-        let posicion = i + 1;
+    for(let i = 0; i < sonidos.length; i++){
+        let celda = document.createElement("div");
+        celda.className = "col-1 text-center";
+        celda.textContent = sonidos[i];
+        ejeHorizontal.append(celda);
+    }
 
-        boton.addEventListener("click", function () {colocarEmision(posicion, boton);});
-        contenedorTablero.append(boton);
+    for(let i = 0; i < signos.length; i++){
+        let celda = document.createElement("div");
+        celda.className = "text-center d-flex align-items-center justify-content-center mb-1";
+        celda.textContent = signos[i];
+
+        ejeVertical.append(celda);
     }
 }
 
@@ -156,7 +181,7 @@ function mostrarObra() {
 // EMISIONES (sílabas)
 // ========================
 
-function colocarEmision(posicion, boton) {
+/*function colocarEmision(posicion, boton) {
     let indice = posicion - 1;
     if (tablero[indice] !== null) {
         alert("Casilla ocupada");
@@ -183,8 +208,35 @@ function colocarEmision(posicion, boton) {
     boton.classList.add("btn-outline-warning");
 
     mostrarSignoActual();
-}
+}*/
 
+
+function colocarEmision(posicion, boton, indiceGlobal) { 
+    if (tablero[indiceGlobal] !== null) { 
+        alert("Casilla ocupada"); 
+        return; 
+    } 
+
+    let silaba = consonante.value + vocales[indiceGlobal % 12]; 
+    let emision = { 
+        silaba: silaba, 
+        sonido: null, 
+        color: null, 
+        posicion: posicion 
+    }; 
+
+    tablero[indiceGlobal] = emision; 
+    signoActual.push(emision); 
+    nodosObra.push(emision.posicion); 
+    
+    crearConexion(); 
+    crearRuedaConstelar(); 
+    
+    boton.textContent = silaba; 
+    boton.classList.remove("btn-outline-secondary"); 
+    boton.classList.add("btn-outline-warning"); 
+
+    mostrarSignoActual(); }
 
 // ========================
 // CERRAR SIGNO
@@ -206,7 +258,7 @@ function cerrarSigno() {
 // ========================
 // CONEXIONES
 // ========================
-
+/*
 function crearConexion() {
     if (nodosObra.length < 2) {
         return;
@@ -222,8 +274,24 @@ function crearConexion() {
 
     conexionesObra.push(conexion);
 
-    //mostrarConexiones();
     dibujarLinea(origen, destino);
+}*/
+
+
+function crearConexion() { 
+    if (nodosObra.length < 2) { 
+        return; 
+    } 
+
+    let origen = nodosObra[nodosObra.length - 2]; 
+    let destino = nodosObra[nodosObra.length - 1]; 
+
+    if (origen !== destino) { 
+        let conexion = [origen, destino]; 
+
+        conexionesObra.push(conexion); 
+        dibujarLinea(origen, destino); 
+    } 
 }
 
 
@@ -263,9 +331,11 @@ function dibujarLinea(origen, destino) {
 
 function revelarObra() {
     cerrarSigno();
+    
     header.remove();
     panel.remove();
     footer.remove();
+    
     contenedorRueda.style.display = "block";
     btnRecrear.style.display = "block";
 
@@ -290,6 +360,7 @@ btnRecrear.addEventListener("click", function() {location.reload()});
 // ========================
 
 crearTablero();
+crearEjes();
 crearRuedaConstelar();
 mostrarSignoActual();
 mostrarObra();

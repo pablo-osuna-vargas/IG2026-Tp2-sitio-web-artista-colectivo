@@ -12,8 +12,8 @@
     <title>Xul Solar - Panajedrez</title>
 </head>
 
-<body class="bg-light text-dark font-monospace d-flex flex-column min-vh-100">
-    <div class="container">
+<body>
+    <div class="container py-4">
         <header>
             <!-- NAVBAR -->
                 <nav class="navbar navbar-expand-md border-bottom">
@@ -29,7 +29,7 @@
                             <div class="navbar-nav ms-auto">
                                 <a class="nav-link" href="bio.html" title="VIDAVITA">BIO</a>
                                 <a class="nav-link" href="panlengua.html" title="PANLENG">PANLENGUA</a>
-                                <a class="nav-link" href="panajedrez.html" title="PANXAD">PANAJEDREZ</a>
+                                <a class="nav-link" href="panajedrez-v2.0.html" title="PANXAD">PANAJEDREZ</a>
                                 <a class="nav-link" href="vanguardia.html" title="NUEVART">VANGUARDIA</a>
                             </div>
                          </div>
@@ -63,7 +63,22 @@
                             <div class="card p-3 mb-3">
                                 <div class="card p-3 mb-3">
                                     <h2 class="h5 text-center">Tablero vocales</h2>
-                                    <div id="tablero" class="row g-2"></div>
+
+                                     <div id="contenedorTablero">
+
+                                        <div>
+                                            <div id="ejeHorizontal" class="d-flex justify-content-around mb-2"></div>
+                                        </div>
+
+                                        <div id="zonaTablero" class="d-flex">
+
+                                            <div id="ejeVertical" class="d-flex flex-column justify-content-around me-2"></div>
+
+                                            <div id="tablero" class="row g-2"></div>
+
+                                        </div>
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -92,11 +107,11 @@
 
 
             <!-- RUEDA CONSTELAR -->
-                <div class="row p-3 mb-3">
-                    <h2 class="rueda h5 text-center">Constelación</h2>
+                <div id="ruedaConstelar" class="rueda row p-3 mb-3">
+                    <h2 class="h5 text-center">Constelación</h2>
 
                 <!-- LIENZO SVG -->
-                    <div id="ruedaConstelar" class="rueda col-md-9">
+                    <div class="col-md-9">
                         
                         <svg id="lienzoConstelar"></svg>
 
