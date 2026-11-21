@@ -357,3 +357,37 @@ En la función crearConexion(), se incorporó la condición: if (origen !== dest
 
 
 
+\--------------------------------------------------------------------------------
+
+==============================
+
+Panajedrez v2.3
+
+==============================
+
+\### Fichas consonánticas. Las consonantes dejan de seleccionarse mediante un menú y pasan a representarse como fichas visibles generadas dinámicamente dentro del tablero.
+
+
+
+\## Drag \& Drop. Se incorpora arrastre y soltado nativo mediante eventos HTML5, permitiendo construir emisiones arrastrando fichas consonánticas sobre las casillas.
+
+
+
+\## Tablero 12×12. El espacio de escritura se expande a una matriz de 144 casillas organizada por ejes zodiacales (vertical) y sonoros (horizontal).
+
+
+
+\## Coordenadas zodiacal-sonoras. Las filas corresponden a los doce signos zodiacales y las columnas a los doce valores sonoros, preparando futuras implementaciones musicales.
+
+
+
+\## Revelación de la obra. La contemplación final reúne en una misma vista la constelación generada, el poema construido y el botón de reinicio “Recrear Cosmos”.
+
+
+
+\## Síntesis de versión. Panajedrez ha evolucionado desde la generación simple de emisiones (consonante + vocal) hacia un sistema capaz de producir signos, poemas y constelaciones a partir de una única estructura de datos: la emisión. La versión 2.3 implementa interacción mediante fichas, amplía el tablero y establece una instancia de contemplación donde lenguaje, espacio y relaciones constelares aparecen integrados en la obra
+
+
+
+\---------------------------------------------------------------------------------
+

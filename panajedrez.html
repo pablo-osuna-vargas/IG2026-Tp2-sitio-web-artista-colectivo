@@ -25,7 +25,6 @@
                     </button>
 
                         <div class="collapse navbar-collapse" id="menu">
-
                             <div class="navbar-nav ms-auto">
                                 <a class="nav-link" href="bio.html" title="VIDAVITA">BIO</a>
                                 <a class="nav-link" href="panlengua.html" title="PANLENG">PANLENGUA</a>
@@ -40,103 +39,103 @@
         </header>
 
         <main>
+
         <!-- PANEL GENERAL -->
             <div id="panel"> <!-- SE OCULTA TODO PARA MOSTRAR LA CONSTELACIÓN -->
                 
                 <div class="row">
 
-                    <!-- FICHAS col 1 -->
-                        <div class="col-md-6">
-                            <div class="card p-3 mb-3">
-                                <h2 class="h5 text-center">fichas Consonante</h2>
+                    <!-- columna 1 -->
+                    <div class="col-md-6">
 
-                                <select id="consonante" class="form-select">
-                                    <option>M</option>
-                                    <option>T</option>
-                                    <option>S</option>
-                                    <option>P</option>
-                                    <option>K</option>
-                                </select>
+                        <!-- FICHAS -->
+                            <div class="card p-3 mb-3">
+                                <h2 class="card-title text-center">Fichas</h2>
+                                <div id="fichas" class="card-body"></div>            
                             </div>
 
-                    <!-- TABLERO -->
+
+                        <!-- TABLERO -->
                             <div class="card p-3 mb-3">
-                                <div class="card p-3 mb-3">
-                                    <h2 class="h5 text-center">Tablero vocales</h2>
+                                <h2 class="card-title text-center">Tablero</h2>
+                                 <div id="contenedorTablero" class="card-body">
+                                    <div class="d-flex flex-row">
+                                        <div class="col-1 d-flex"></div>
+                                        <div id="ejeHorizontal" class="col-11 d-flex flex-md-row justify-content-center mb-2"></div>
+                                    </div>
 
-                                     <div id="contenedorTablero">
-
-                                        <div>
-                                            <div id="ejeHorizontal" class="d-flex justify-content-around mb-2"></div>
-                                        </div>
-
-                                        <div id="zonaTablero" class="d-flex">
-
-                                            <div id="ejeVertical" class="d-flex flex-column justify-content-around me-2"></div>
-
-                                            <div id="tablero" class="row g-2"></div>
-
-                                        </div>
-
+                                    <div id="zonaTablero" class="d-flex">
+                                        <div id="ejeVertical" class="d-flex flex-column justify-content-around me-2"></div>
+                                        <div id="tablero" class="row g-2"></div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                    </div>
 
-                    <!-- VISOR DE SIGNOS col 2 -->
-                        <div class="signo col-md-6 d-flex flex-column">
-                            <h2 class="h5 text-center">Signo</h2>
-                            <p id="signoActual" class="h5 mb-3"></p>
 
-                            <button id="btnCerrar" class="btn btn-secondary">Cerrar signo</button>
-                        </div>
+                    <!-- columna 2 -->
+                    <div class="col-md-6">
+                        
+                        <!-- VISOR DE SIGNOS -->
+                            <div class="card p-3 mb-3">
+                                <h2 class="card-title text-center">Signo</h2>
+                                <div class="card-body">
+                                    <p id="signoActual" class="h5 mb-3"></p>
+                                    <button id="btnCerrar" class="btn btn-secondary">Crear Signo</button>
+                                </div>
+                            </div>
+
+
+                        <!-- VISOR POEMA -->
+                            <div>
+                                <div id="poema" class="card p-3 mb-3">
+                                    <h2 class="card-title text-center">Poema</h2>
+                                    <div id="obra" class="card-body"></div>
+                                </div>
+                            </div>
+
+
+                            <!-- BOTON REVELAR OBRA -->
+                            <div class="card p-3 mb-3">
+                                <div class="text-center">
+                                    <button id="btnRevelar" class="btn btn-dark m-3">13<br>Revelar obra</button>
+                                </div>
+                            </div>
+                    </div>
                 </div>
 
-
-                <!-- BOTON EXPONER col 4 -->
-                    <div class="row">
-                        <div class="text-center">
-                            <button id="btnRevelar" class="btn btn-dark m-3">
-                                13
-                                <br>
-                                Revelar obra
-                            </button>
-                        </div>
-                    </div>
             </div>
 
 
             <!-- RUEDA CONSTELAR -->
-                <div id="ruedaConstelar" class="rueda row p-3 mb-3">
-                    <h2 class="h5 text-center">Constelación</h2>
-
-                <!-- LIENZO SVG -->
-                    <div class="col-md-9">
-                        
-                        <svg id="lienzoConstelar"></svg>
-
-                        <div id="nodos"></div>
-                            
-                    </div>
-                </div>
-
-
-            <!-- VISOR OBRA col 3 -->
                 <div class="row">
-                    <div class="col">
-                        <div class="card p-3 mb-3 border-0">
-                            <h2 class="h5 text-center">Poema</h2>
-                            <div id="obra"></div>
+
+                <!-- COLUMNA 1 -->
+                    <div id="ruedaConstelar" class="rueda col-md-6">
+
+                        <div class="card p-3 mb-3">
+                            <div class="card-title">Constelación</div>
+
+                            <div class="constelacion card-body position-relative">
+                                <svg id="lienzoConstelar"></svg>
+                                <div id="nodos"></div>
+                            </div>
                         </div>
+
+                        <div class="card p-3">
+                            <button id="btnRecrear" class="btn btn-light">
+                                Recrear Cosmos
+                            </button>
+                        </div>
+
                     </div>
+
+                <!-- COLUMNA 2 -->
+                    <div id="columnaPoema" class="col-md-6"></div>
+
                 </div>
 
-            <!-- BOTON REINICIO -->
-                <div class="row">
-                    <button id="btnRecrear" class="btn btn-light m-3">Recrear Cosmos</button>
-                </div>
-
-        </main>
+            </main>
 
         <!-- FOOTER -->
             <footer class="d-flex flex-column flex-md-row justify-content-between align-items-center py-3 px-4 border-top border-dark opacity-50 small">

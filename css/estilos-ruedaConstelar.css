@@ -1,9 +1,10 @@
 .rueda {
     display: none;
-    position: relative;
+}
+
+.constelacion {
     width: 400px;
     height: 400px;
-    margin: 0 auto;
 }
 
 .nodo {
