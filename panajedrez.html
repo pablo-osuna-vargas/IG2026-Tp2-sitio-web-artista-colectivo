@@ -12,8 +12,9 @@
     <title>Xul Solar - Panajedrez</title>
 </head>
 
-<body>
-    <div class="container py-4">
+<body class="bg-light text-dark font-monospace d-flex flex-column min-vh-100">
+    <div class="container">
+
         <header>
             <!-- NAVBAR -->
                 <nav class="navbar navbar-expand-md border-bottom">
@@ -35,38 +36,39 @@
                     </div>
                 </nav>
 
-            <h1 class="text-center mb-4 mt-4">PANAJEDREZ</h1>
         </header>
 
-        <main>
+        <main class="container-fluid">
 
         <!-- PANEL GENERAL -->
             <div id="panel"> <!-- SE OCULTA TODO PARA MOSTRAR LA CONSTELACIÓN -->
+
+                <h1 class="text-center mb-4 mt-4">PANAJEDREZ</h1>
                 
                 <div class="row">
 
                     <!-- columna 1 -->
-                    <div class="col-md-6">
+                    <div class="col-12 col-md-9">
 
                         <!-- FICHAS -->
-                            <div class="card p-3 mb-3">
-                                <h2 class="card-title text-center">Fichas</h2>
+                            <div class="card p-1 mb-1 d-flex justify-content-center align-items-center">
+                                <h2 class="card-title text-center mb-0">Fichas</h2>
                                 <div id="fichas" class="card-body"></div>            
                             </div>
 
 
                         <!-- TABLERO -->
                             <div class="card p-3 mb-3">
-                                <h2 class="card-title text-center">Tablero</h2>
+                                <!-- <h2 class="card-title text-center">Tablero</h2> -->
                                  <div id="contenedorTablero" class="card-body">
                                     <div class="d-flex flex-row">
                                         <div class="col-1 d-flex"></div>
-                                        <div id="ejeHorizontal" class="col-11 d-flex flex-md-row justify-content-center mb-2"></div>
+                                        <div id="ejeHorizontal" class="col-11 d-flex flex-md-row justify-content-around mb-2"></div>
                                     </div>
 
                                     <div id="zonaTablero" class="d-flex">
                                         <div id="ejeVertical" class="d-flex flex-column justify-content-around me-2"></div>
-                                        <div id="tablero" class="row g-2"></div>
+                                        <div id="tablero" class="row g-1"></div>
                                     </div>
                                 </div>
                             </div>
@@ -74,10 +76,10 @@
 
 
                     <!-- columna 2 -->
-                    <div class="col-md-6">
+                    <div class="col-12 col-md-3">
                         
                         <!-- VISOR DE SIGNOS -->
-                            <div class="card p-3 mb-3">
+                            <div class="card p-3 mb-3 h-33">
                                 <h2 class="card-title text-center">Signo</h2>
                                 <div class="card-body">
                                     <p id="signoActual" class="h5 mb-3"></p>
@@ -87,7 +89,7 @@
 
 
                         <!-- VISOR POEMA -->
-                            <div>
+                            <div class="card p-3 mb-3 h-33">
                                 <div id="poema" class="card p-3 mb-3">
                                     <h2 class="card-title text-center">Poema</h2>
                                     <div id="obra" class="card-body"></div>
@@ -96,7 +98,7 @@
 
 
                             <!-- BOTON REVELAR OBRA -->
-                            <div class="card p-3 mb-3">
+                            <div class="card p-3 mb-3 h-33">
                                 <div class="text-center">
                                     <button id="btnRevelar" class="btn btn-dark m-3">13<br>Revelar obra</button>
                                 </div>
@@ -108,21 +110,23 @@
 
 
             <!-- RUEDA CONSTELAR -->
-                <div class="row">
+                <div class="row align-items-center">
 
                 <!-- COLUMNA 1 -->
-                    <div id="ruedaConstelar" class="rueda col-md-6">
+                    <div id="ruedaConstelar" class="rueda col-12 col-md-9">
 
-                        <div class="card p-3 mb-3">
-                            <div class="card-title">Constelación</div>
+                        <div class="card p-3 mb-3 mt-5 text-center">
+                            <div class="h2 card-title">Constelación</div>
 
-                            <div class="constelacion card-body position-relative">
-                                <svg id="lienzoConstelar"></svg>
-                                <div id="nodos"></div>
+                            <div class="card-body d-flex justify-content-center">
+                                <div class="constelacion position-relative">
+                                    <svg id="lienzoConstelar" class="position-absolute"></svg>
+                                    <div id="nodos"></div>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="card p-3">
+                        <div class="card p-3 m-3">
                             <button id="btnRecrear" class="btn btn-light">
                                 Recrear Cosmos
                             </button>
@@ -131,7 +135,7 @@
                     </div>
 
                 <!-- COLUMNA 2 -->
-                    <div id="columnaPoema" class="col-md-6"></div>
+                    <div id="columnaPoema" class="col-12 col-md-3"></div>
 
                 </div>
 

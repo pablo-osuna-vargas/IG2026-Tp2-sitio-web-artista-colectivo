@@ -391,3 +391,73 @@ Panajedrez v2.3
 
 \---------------------------------------------------------------------------------
 
+===================================
+
+Panajedrez-v2.4
+
+===================================
+
+\### SINTESIS:
+
+\# Audio nativo Web Audio API con 12 frecuencias + envolvente Attack/Decay
+
+\# Secuencia sonora: Reproducción de la constelación sonora con temporizadores
+
+\# Layout optimizado: Distribución responsive del panel y de Constelación SVG.
+
+
+
+\## Motor de Audio Nativo (Web Audio API)
+
+\# Generación de sonido en tiempo real utilizando Web Audio API nativa (`AudioContext`). Generación de tonos puros con osciladores y envolventes de volumen dinámicas
+
+
+
+\## Mapeo de Frecuencias (Octava Temperada)
+
+\# Array de 12 frecuencias (Hz) de la octava temperada (C4 a B4). mapeo con array `sonidos` (12 columnas del tablero)
+
+
+
+\# function emitirSonido(sonidoFrecuencia, duracion); 
+
+
+
+\## Estructura de Datos Extendida (`emision`)
+
+El objeto “emision” sigue siendo la fuente de datos para silaba, posición, sonido y color
+
+
+
+\## Secuenciador de Constelación Final (revelar obra)
+
+\# Al cliquear "Revelar obra", se ejecuta reproducirMelodiaObra(), reproduce la melodía compuesta por la totalidad de emisiones del poema.
+
+
+
+\## Recorrido de la Matriz `obra`
+
+El array `obra` es bidimensional (array de ´signos¨ = cada signo es un array de ¨emisiones¨) La función utiliza dos for anidados para reducir la estructura en una lista única:
+
+El for externo `i` recorre los signos cerrados. En el for interno `j` extrae cada emisión de cada signo.
+
+
+
+\## Temporizadores (`setInterval` y `reproductorInterval`)
+
+\# `setInterval()` para ejecutar la reproducción de cada nota con intervalos constantes
+
+\# `reproductorInterval` para gestionar activación del temporizador.
+
+\# Limpieza de intervalos: Al finalizar la lista de emisiones, o al cliquear `Recrear Cosmos`, se ejecuta `clearInterval(reproductorInterval)` y se restablece la variable a `null`. Para prevenir reproducciones residuales en segundo plano.
+
+
+
+\## Optimizaciones (Bootstrap Flexbox)
+
+\# Desalineaciones de obra y de tablero corregidas
+
+
+
+\--------------------------------------------------------------------------------------------
+

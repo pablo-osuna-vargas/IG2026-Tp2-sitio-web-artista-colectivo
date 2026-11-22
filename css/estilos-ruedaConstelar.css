@@ -5,6 +5,8 @@
 .constelacion {
     width: 400px;
     height: 400px;
+    position: relative; /* el SVG y los nodos se posicionan respecto a esta caja */ 
+    margin: 0 auto;
 }
 
 .nodo {

@@ -5,15 +5,19 @@ let signoActual = []; // contiene los signos cerrados para renderizar en pantall
 let obra = []; // contiene los signos que la componen
 let nodosObra = []; // contiene los nodos (posiciones) activadas por el ususario
 let conexionesObra = []; // contiene los pares de nodos en relación (es decir conectados entre sí) par: origen, destino
+let consonanteActiva = null; // inicia sin ninguna ficha "seleccionada"
+let reproductorInterval = null; // inicia sin ningún sonido previo
     
 // ========================
 // TABLERO
 // ========================
 const vocales = ["AA","EI","OU","IE","UO","AA","EI","OU","IE","UO","AA","EI"];
 const consonantes = ["B","C","D","F","G","H","J","K","L","M","N","P","Q","R","S","T","V","W","X","Y","Z"];
-let consonanteActiva = null;
-const sonidos = ["1","2","3","4","5","6","7","8","9","Q","&","IO"];
 const signos = ["♈","♉","♊","♋","♌","♍","♎","♏","♐","♑","♒","♓"];
+
+const sonidos = ["1","2","3","4","5","6","7","8","9","Q","&","IO"];
+const frecuencias = ["261.63", "277.18", "293.66","311.13", "329.63","349.23","369.99","392.00","415.30","440.00","466.16","493.88"];
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)(); // Web Audio API, Emite sonido sintetizado con envolvente
 
 let tablero = [];
     for (let i = 0; i < 144; i++) {
@@ -28,10 +32,13 @@ const footer = document.querySelector("footer");
 const panel = document.querySelector("#panel");
 const poema = document.querySelector ("#poema");
 const consonante = document.querySelector("#consonante");
+
 const contenedorTablero = document.querySelector("#tablero");
 const ejeHorizontal = document.querySelector("#ejeHorizontal");
 const ejeVertical = document.querySelector("#ejeVertical");
+
 const textoSigno = document.querySelector("#signoActual");
+
 const contenedorRueda = document.querySelector("#ruedaConstelar");
 const lienzoConstelar = document.querySelector("#lienzoConstelar");
 const nodos = document.querySelector("#nodos");
@@ -50,9 +57,10 @@ const geografiaConstelar = {
     10: { left: 50,  top: 90 },
     11: { left: 110, top: 35 }
 };
+
 const contenedorObra = document.querySelector("#obra");
-const btnCerrar = document.querySelector("#btnCerrar");
 const btnRevelar = document.querySelector("#btnRevelar");
+const btnCerrar = document.querySelector("#btnCerrar");
 
 
 // ==================================================
@@ -63,19 +71,19 @@ function crearTablero() {
      
     for (let fila = 0; fila < 12; fila++) { 
         let filaDiv = document.createElement("div"); 
-        filaDiv.className = "row g-1 mb-1"; // Fila Bootstrap con espaciado 
+        filaDiv.className = "row"; // Fila Bootstrap con espaciado 
     
         let posicionNodo = fila + 1; // Asigna el Nodo (1 a 12) según la fila 
 
     for (let col = 0; col < 12; col++) { 
         let boton = document.createElement("button"); 
-        boton.className = "col-1 btn btn-sm btn-outline-secondary p-1 text-center"; 
+        boton.className = "col-1 btn btn-sm btn-outline-secondary p-2 text-center"; 
         boton.textContent = vocales[col];
 
         let indiceGlobal = (fila * 12) + col;
 
-        boton.addEventListener("click", function () {colocarEmision(posicionNodo, boton, indiceGlobal);}); // Al hacer clic, se envía posicionNodo (1-12) correspondiente a la fila 
-        boton.addEventListener("dragover", function (e) {e.preventDefault();}); // EVENTO DRAGOVER (OBLIGATORIO PARA AUTORIZAR EL SOLTADO) 
+        boton.addEventListener("click", function () {colocarEmision(posicionNodo, col, boton, indiceGlobal);}); // Al hacer clic, se envía posicionNodo (1-12) correspondiente a la fila 
+        boton.addEventListener("dragover", function (e) {e.preventDefault();}); // EVENTO DRAGOVER (OBLIGATORIO PARA AUTORIZAR EL DROP) 
         boton.addEventListener("drop", function (e) {e.preventDefault(); // EVENTO DROP (RECUPERA LA CONSONANTE Y COLOCA LA EMISIÓN)
 
         let consonanteArrastrada = e.dataTransfer.getData("consonante"); 
@@ -99,7 +107,7 @@ function crearEjes() {
 
     for(let i = 0; i < sonidos.length; i++){
         let celda = document.createElement("div");
-        celda.className = "col-1 text-center";
+        celda.className = "col-1";
         celda.textContent = sonidos[i];
         ejeHorizontal.append(celda);
     }
@@ -216,29 +224,32 @@ function mostrarObra() {
 
 
 // ========================
-// CREAR EMISION (sílaba)
+// COLOCAR EMISION (sílaba)
 // ========================
-function colocarEmision(posicion, boton, indiceGlobal, consonanteArrastrada) { 
+function colocarEmision(posicion, col, boton, indiceGlobal, consonanteArrastrada) { 
     if (tablero[indiceGlobal] !== null) { 
         alert("Casilla ocupada"); 
         return; 
     }
 
+    let indiceColumna = col; // indice del 0 al 11
+    
     let letraConsonante = consonanteArrastrada || consonanteActiva; // Si viene del Drag&Drop usa consonanteManual; si no, usa el input global
-
-    // Si en mobile responsive no se seleccionó ninguna consonante antes de tocar la casilla 
-    if (!letraConsonante) { 
-        alert("Seleccioná una consonante primero."); 
-        return; 
-    }
-
-    let silaba = letraConsonante + vocales[indiceGlobal % 12]; 
+        // Si en mobile responsive no se seleccionó ninguna consonante antes de tocar la casilla 
+        if (!letraConsonante) { 
+            alert("Seleccioná una consonante primero."); 
+            return; 
+        }
+    let silaba = letraConsonante + vocales[indiceGlobal % 12];
     let emision = { 
         silaba: silaba, 
-        sonido: null, 
+        sonidoSimbolo: sonidos[indiceColumna],
+        sonidoFrecuencia: frecuencias[indiceColumna], 
         color: null, 
         posicion: posicion 
-    }; 
+    };
+
+    emitirSonido(emision.sonidoFrecuencia); // llama a la función para emitir la frecuencia correspondiente a ese sonido
 
     tablero[indiceGlobal] = emision; 
     signoActual.push(emision); 
@@ -252,6 +263,37 @@ function colocarEmision(posicion, boton, indiceGlobal, consonanteArrastrada) {
     boton.classList.add("btn-outline-warning"); 
 
     mostrarSignoActual(); 
+}
+
+
+// ============================
+// SONIDO librería nativa HTML
+// ============================
+function emitirSonido(sonidoFrecuencia, duracion = 0.9) { 
+    if (!sonidoFrecuencia) 
+        return; // Asegurar que el contexto esté activo (requisito navegador) 
+    
+    if (audioCtx.state === "suspended") { 
+    audioCtx.resume(); 
+    } 
+
+    let osc = audioCtx.createOscillator(); 
+    let gain = audioCtx.createGain(); // Timbre ("triangle") 
+    osc.type = "triangle"; 
+    osc.frequency.value = sonidoFrecuencia; // frecuencia mapeada con el array "sonidos=[]"
+
+    let ahora = audioCtx.currentTime; // Marca de tiempo actual del reloj de audio
+
+// ENVOLVENTE DE VOLUMEN (ATTACK / DECAY):
+    let attackTime = 0.3; // Duración de la fase de ataque (en segundos) 
+    gain.gain.setValueAtTime(0, ahora); // Punto de partida: volumen 0 en 'ahora' 
+    gain.gain.linearRampToValueAtTime(0.5, ahora + attackTime); // ATTACK: sube el volumen a 0.5 (durante 0.3sec sube hasta 0.5amp)
+    gain.gain.exponentialRampToValueAtTime(0.0001, ahora + attackTime + duracion); // DECAY: cae progresivamente a 0 (luego de 0.3sec cae a 0 durante 0.9sec) 
+
+    osc.connect(gain); 
+    gain.connect(audioCtx.destination); // Inicio y detención programados 
+    osc.start(ahora); 
+    osc.stop(ahora + attackTime + duracion); 
 }
 
 
@@ -335,10 +377,54 @@ function revelarObra() {
     contenedorRueda.style.display = "block";
     btnRecrear.style.display = "block";
 
-    alert(
-        "La obra ha sido revelada.\n" +
-        "Cantidad de signos: " + obra.length
-    );
+    //alert(
+    //    "La obra ha sido revelada.\n" +
+    //    "Cantidad de signos: " + obra.length
+    //);
+
+    reproducirMelodiaObra();
+}
+
+
+// =====================================
+// REPRODUCIR MELODÍA CONSTELACIÓN
+// =====================================
+function reproducirMelodiaObra() { 
+    if (reproductorInterval) clearInterval(reproductorInterval); // si hay sonidos previso se detiene el reproductor
+    
+// fuerza el inicio del motor de sonido
+    if (audioCtx.state === "suspended") { 
+        audioCtx.resume(); 
+    }
+
+// Recopila todas las emisiones de todos los signos en un array local 
+    let listaEmisiones = []; 
+    
+    for (let i = 0; i < obra.length; i++) { 
+        for (let j = 0; j < obra[i].length; j++) { 
+        listaEmisiones.push(obra[i][j]); 
+        } 
+    }  
+
+    if (listaEmisiones.length === 0) return; // Si no se creó ninguna emisión, salimos 
+    
+    let indice = 0; 
+
+// Inicia temporizador (cada 900 milisegundos = 0.9s x nota) 
+    let reproductor = setInterval(function () { 
+        // Cuando termina de recorrer la longitud del array listaEmisiones detiene el temporizador 
+        if (indice >= listaEmisiones.length) { 
+            clearInterval(reproductor); 
+            return; 
+        } 
+
+// 3\. Tomamos la emisión actual y hacemos sonar su frecuencia 
+        let emisionActual = listaEmisiones[indice]; 
+
+        emitirSonido(emisionActual.sonidoFrecuencia, 0.9); // 0.9s de duración para que resuene bien 
+        
+        indice++; 
+        }, 1000); // Ritmo de la melodía (100 ms entre nota y nota) 
 }
 
 
@@ -347,7 +433,15 @@ function revelarObra() {
 // ========================
 btnCerrar.addEventListener("click", cerrarSigno);
 btnRevelar.addEventListener("click", revelarObra);
-btnRecrear.addEventListener("click", function() {location.reload()});
+btnRecrear.addEventListener("click", function() {
+    // si hay sonidos previos los detiene
+    if (reproductorInterval) { 
+        clearInterval(reproductorInterval); 
+        reproductorInterval = null; 
+    }
+    
+    location.reload()
+});
 
 
 // ========================
