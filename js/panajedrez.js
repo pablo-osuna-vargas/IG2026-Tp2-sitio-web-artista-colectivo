@@ -27,6 +27,9 @@ let tablero = [];
 // ========================
 // DOM
 // ========================
+const reglas = document.querySelector("#reglas");
+const btnCrearCosmos = document.querySelector("#btnCrearCosmos");
+
 const header = document.querySelector("header");
 const footer = document.querySelector("footer");
 const panel = document.querySelector("#panel");
@@ -88,7 +91,7 @@ function crearTablero() {
 
         let consonanteArrastrada = e.dataTransfer.getData("consonante"); 
  
-        colocarEmision(posicionNodo, boton, indiceGlobal, consonanteArrastrada);}); // Ejecuta la emisión enviándole la consonante arrastrada
+        colocarEmision(posicionNodo, col, boton, indiceGlobal, consonanteArrastrada);}); // Ejecuta la emisión enviándole la consonante arrastrada
 
         filaDiv.append(boton);
         } 
@@ -377,11 +380,6 @@ function revelarObra() {
     contenedorRueda.style.display = "block";
     btnRecrear.style.display = "block";
 
-    //alert(
-    //    "La obra ha sido revelada.\n" +
-    //    "Cantidad de signos: " + obra.length
-    //);
-
     reproducirMelodiaObra();
 }
 
@@ -421,16 +419,22 @@ function reproducirMelodiaObra() {
 // 3\. Tomamos la emisión actual y hacemos sonar su frecuencia 
         let emisionActual = listaEmisiones[indice]; 
 
-        emitirSonido(emisionActual.sonidoFrecuencia, 0.9); // 0.9s de duración para que resuene bien 
+        emitirSonido(emisionActual.sonidoFrecuencia, 0.6); // 0.6s de duración para que resuene bien 
         
         indice++; 
-        }, 1000); // Ritmo de la melodía (100 ms entre nota y nota) 
+        }, 500); // Ritmo de la melodía (500 ms entre nota y nota) 
 }
 
 
 // ========================
 // EVENTOS
 // ========================
+btnCrearCosmos.addEventListener("click", function() { 
+    reglas.classList.add("d-none"); 
+    interfaz.classList.remove("d-none"); 
+    interfaz.classList.add("d-block"); 
+});
+
 btnCerrar.addEventListener("click", cerrarSigno);
 btnRevelar.addEventListener("click", revelarObra);
 btnRecrear.addEventListener("click", function() {
