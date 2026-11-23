@@ -47,18 +47,18 @@ const lienzoConstelar = document.querySelector("#lienzoConstelar");
 const nodos = document.querySelector("#nodos");
 const btnRecrear = document.querySelector("#btnRecrear");
 const geografiaConstelar = {
-    12: { left: 190, top: 10 },
-    1:  { left: 270, top: 35 },
-    2:  { left: 330, top: 90 },
-    3:  { left: 355, top: 180 },
-    4:  { left: 330, top: 270 },
-    5:  { left: 270, top: 330 },
-    6:  { left: 190, top: 355 },
-    7:  { left: 110, top: 330 },
-    8:  { left: 50,  top: 270 },
-    9:  { left: 25,  top: 180 },
-    10: { left: 50,  top: 90 },
-    11: { left: 110, top: 35 }
+    12: { left: 47.5, top: 2.5 },
+    1:  { left: 67.5, top: 8.75 },
+    2:  { left: 82.5, top: 22.5 },
+    3:  { left: 88.75, top: 45 },
+    4:  { left: 82.5, top: 67.5 },
+    5:  { left: 67.5, top: 82.5 },
+    6:  { left: 47.5, top: 88.75 },
+    7:  { left: 27.5, top: 82.5 },
+    8:  { left: 12.5, top: 67.5 },
+    9:  { left: 6.25, top: 45 },
+    10:{ left: 12.5, top: 22.5 },
+    11:{ left: 27.5, top: 8.75 }
 };
 
 const contenedorObra = document.querySelector("#obra");
@@ -80,12 +80,12 @@ function crearTablero() {
 
     for (let col = 0; col < 12; col++) { 
         let boton = document.createElement("button"); 
-        boton.className = "col-1 btn btn-sm btn-outline-secondary p-2 text-center"; 
+        boton.className = "col-1 btn btn-sm btn-outline-secondary text-center casilla"; // agrega una clase "btn-sm" para mobile first: hace el mismo boton pero "clase pequeña"
         boton.textContent = vocales[col];
 
         let indiceGlobal = (fila * 12) + col;
 
-        boton.addEventListener("click", function () {colocarEmision(posicionNodo, col, boton, indiceGlobal);}); // Al hacer clic, se envía posicionNodo (1-12) correspondiente a la fila 
+        boton.addEventListener("click", function () {colocarEmision(posicionNodo, col, boton, indiceGlobal);}); // Al hacer clic, se envía numero de fila y posicion dentro, numero de columna, boton de vocal, y actualiza indice global 
         boton.addEventListener("dragover", function (e) {e.preventDefault();}); // EVENTO DRAGOVER (OBLIGATORIO PARA AUTORIZAR EL DROP) 
         boton.addEventListener("drop", function (e) {e.preventDefault(); // EVENTO DROP (RECUPERA LA CONSONANTE Y COLOCA LA EMISIÓN)
 
@@ -110,14 +110,14 @@ function crearEjes() {
 
     for(let i = 0; i < sonidos.length; i++){
         let celda = document.createElement("div");
-        celda.className = "col-1";
+        celda.className = "col-1 text-center p-0 casilla";
         celda.textContent = sonidos[i];
         ejeHorizontal.append(celda);
     }
 
     for(let i = 0; i < signos.length; i++){
         let celda = document.createElement("div");
-        celda.className = "text-center d-flex align-items-center justify-content-center mb-1";
+        celda.className = "col-1 text-center p-0 casilla";
         celda.textContent = signos[i];
 
         ejeVertical.append(celda);
@@ -175,8 +175,9 @@ function crearRuedaConstelar() {
     for (let i = 1; i <= 12; i++) {
         let nodo = document.createElement("div");
         nodo.className = "nodo";
-        nodo.style.left = geografiaConstelar[i].left + "px";
-        nodo.style.top = geografiaConstelar[i].top + "px";
+        nodo.style.left = geografiaConstelar[i].left + "%";
+        nodo.style.top = geografiaConstelar[i].top + "%";
+        nodo.style.transform = "translate(-50%, -50%)";
 
         let activo = false;
         for (let j = 0; j < nodosObra.length; j++) {
@@ -220,7 +221,7 @@ function mostrarObra() {
 
         let p = document.createElement("p");
         p.textContent = texto;
-        p.classList = "text-center";
+        p.classList = "text-center m-0";
         contenedorObra.append(p);
     }
 }
@@ -344,19 +345,19 @@ function dibujarLinea(origen, destino) {
     let nodoOrigen = geografiaConstelar[origen];
     let nodoDestino = geografiaConstelar[destino];
 
-    let x1 = nodoOrigen.left + 12;
-    let y1 = nodoOrigen.top + 12;
+    let x1 = nodoOrigen.left;
+    let y1 = nodoOrigen.top;
 
-    let x2 = nodoDestino.left + 12;
-    let y2 = nodoDestino.top + 12;
+    let x2 = nodoDestino.left;
+    let y2 = nodoDestino.top;
 
     let linea = document.createElementNS("http://www.w3.org/2000/svg", "line");
 
-    linea.setAttribute("x1", x1);
-    linea.setAttribute("y1", y1);
+    linea.setAttribute("x1", x1 + "%");
+    linea.setAttribute("y1", y1 + "%");
 
-    linea.setAttribute("x2", x2);
-    linea.setAttribute("y2", y2);
+    linea.setAttribute("x2", x2 + "%");
+    linea.setAttribute("y2", y2 + "%");
 
     linea.setAttribute("stroke", "gold");
     linea.setAttribute("stroke-width", "3");

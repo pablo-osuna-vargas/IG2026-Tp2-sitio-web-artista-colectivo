@@ -1,9 +1,18 @@
+.casilla{
+    font-size: 0.65rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .rueda {
     display: none;
 }
 
 .constelacion {
-    width: 400px;
+    width: 100%;
+    max-width: 400px;
     height: 400px;
     position: relative; /* el SVG y los nodos se posicionan respecto a esta caja */ 
     margin: 0 auto;

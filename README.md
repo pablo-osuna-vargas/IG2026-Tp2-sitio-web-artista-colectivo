@@ -457,7 +457,15 @@ El for externo `i` recorre los signos cerrados. En el for interno `j` extrae cad
 
 \# Desalineaciones de obra y de tablero corregidas
 
+--------------------------------------------------------------------------------------------
+====================================================
+panajedrez- v2.6 - Implementación Responsive
+====================================================
+### Constelación
+# Coordenadas absolutas en píxeles hacia coordenadas relativas (%) sobre el contenedor de la rueda. Esta modificación permitió conservar la disposición zodiacal de los doce nodos en resoluciones móviles y de escritorio sin alterar la lógica de generación de signos, conexiones u obra.
 
+# La adaptación responsive requirió revisar elSVG de conexiones, haciendo que líneas y nodos compartieran el mismo sistema de coordenadas relativas. Los nodos fueron recentrados respecto a su posición geométrica para que las conexiones vuelvan a unirse correctamente a cada vértice de la constelación independientemente del tamaño de pantalla con nodo.style.transform = "translate(-50%, -50%)";
 
-\--------------------------------------------------------------------------------------------
+# Queda terminar de estilizar la constelación con el agregado de numeros y signos para una mejor correlación temática, como también la implementación de una paleta de 12 colores paralelos a los números signos y sonidos
 
+-------------------------------------------------------------------------------------------
